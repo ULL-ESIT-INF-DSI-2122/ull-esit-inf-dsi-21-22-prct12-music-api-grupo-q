@@ -12,15 +12,15 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "module": "CommonJS", 
-    "noImplicitAny": true,                     /* Expressions and declarations with an implied 'any' type. */
-    "strictNullChecks": true,                  /* Strict null checks. */
-    //"esModuleInterop": true,
-    //"suppressExcessPropertyErrors": true,
+    //"noImplicitAny": true,                     /* Expressions and declarations with an implied 'any' type. */
+    // "strictNullChecks": true,                  /* Strict null checks. */
+    "esModuleInterop": true,
+    "suppressExcessPropertyErrors": true,
     "forceConsistentCasingInFileNames": true,  /* Ensure that casing is correct in imports. */
     //"strict": true,                            /* Enable all strict type-checking options. */
     "skipLibCheck": true,
     //"noUnusedLocals": true,
     //"noUnusedParameters": true,
-    "noImplicitReturns": false                    /* Skip type checking all .d.ts files. */
+    "noImplicitReturns": true                    /* Skip type checking all .d.ts files. */
   }
 }
