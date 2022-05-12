@@ -22,7 +22,6 @@
 </p>
 
 ### Componentes del grupo que han realizado el proyecto:
-- Jairo Alonso Abreu [(alu0101330778@ull.edu.es)](malito:alu0101330778@ull.edu.es)
 - José Javier Díaz González [(alu0101128894@ull.edu.es)](malito:alu0101128894@ull.edu.es)
 - Daniel Hernández Fajardo [(alu0101320489@ull.edu.es)](malito:alu0101320489@ull.edu.es)
 - Álvaro Rodríguez Gómez [(alu0101362953@ull.edu.es)](malito:alu0101362953@ull.edu.es)
