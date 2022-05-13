@@ -49,7 +49,7 @@ En la ruta [`src/routers`](https://ull-esit-inf-dsi-2122.github.io/prct11-async-
 
 ### 3.1. Router Default. <a name="routerdefault"></a>
 
-En el fichero [src/routers/default.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/routers/default.ts) contiene únicamente un router con una sentencia y una ruta genérica simbolizada con `*`. El propósito de esto es el de crear un receptor por defecto para todas esas peticiones erróneas, ya sea porque se realizan a una ruta no soportada o usando un tipo de mensaje incorrecto. Todas esas peticiones que no encajan en las demás, son respondidas con un status *501*.
+En el fichero [`src/routers/default.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/routers/default.ts) contiene únicamente un router con una sentencia y una ruta genérica simbolizada con `*`. El propósito de esto es el de crear un receptor por defecto para todas esas peticiones erróneas, ya sea porque se realizan a una ruta no soportada o usando un tipo de mensaje incorrecto. Todas esas peticiones que no encajan en las demás, son respondidas con un status *501*.
 
 ### 3.2. Routers Canciones, artistas y playlists. <a name="routers2"></a>
 
