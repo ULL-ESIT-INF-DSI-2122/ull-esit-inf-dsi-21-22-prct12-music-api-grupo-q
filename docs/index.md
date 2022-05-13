@@ -117,7 +117,7 @@ Se ha seguido el tutorial propuesto por el profesor.
 
 ## 7. Referencias. <a name="referencias"></a>
 
-- [Guión práctica 12](https://ull-esit-inf-dsi-2122.github.io/prct12-music-api/)
+- [Guión práctica 12.](https://ull-esit-inf-dsi-2122.github.io/prct12-music-api/)
 - [Apuntes sobre Node.js](https://ull-esit-inf-dsi-2122.github.io/nodejs-theory/nodejs-intro.html)
 - [Apuntes sobre MongoDB](https://www.mongodb.com/es)
 - [Apuntes sobre Mongoose](https://mongoosejs.com/)
