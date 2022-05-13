@@ -32,9 +32,9 @@ Además, se hace uso de Mongoose para implementar la base de datos que contendr�
 
 Por lo que será necesario dividir la carpeta `src` en varias subcarpetas:
 
-- [`models`]() donde se encontrarán los ficheros correspondiente a los schemas que realizaremos.
-- [`routers`]() donde especificamos las operaciones que realizara la base de datos.
-- [`db`]() que contendrá el archivo encargado de establecer la conexión al servidor de MongoDB. 
+- [`models`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/tree/master/src/models) donde se encontrarán los ficheros correspondiente a los schemas que realizaremos.
+- [`routers`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/tree/master/src/routers) donde especificamos las operaciones que realizara la base de datos.
+- [`db`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/tree/master/src/db) que contendrá el archivo encargado de establecer la conexión al servidor de MongoDB. 
 - [`index.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/index.ts) que será el fichero que defina el esquema y modelo de datos con Mongoose. 
 
 ### 2.1. Clase Canciones. <a name="canciones"></a>
@@ -49,7 +49,7 @@ En la ruta [`src/routers`](https://ull-esit-inf-dsi-2122.github.io/prct11-async-
 
 ### 3.1. Router Default. <a name="routerdefault"></a>
 
-En el fichero [src/routers/default.ts]() contiene únicamente un router con una sentencia y una ruta genérica simbolizada con `*`. El propósito de esto es el de crear un receptor por defecto para todas esas peticiones erróneas, ya sea porque se realizan a una ruta no soportada o usando un tipo de mensaje incorrecto. Todas esas peticiones que no encajan en las demás, son respondidas con un status *501*.
+En el fichero [src/routers/default.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/routers/default.ts) contiene únicamente un router con una sentencia y una ruta genérica simbolizada con `*`. El propósito de esto es el de crear un receptor por defecto para todas esas peticiones erróneas, ya sea porque se realizan a una ruta no soportada o usando un tipo de mensaje incorrecto. Todas esas peticiones que no encajan en las demás, son respondidas con un status *501*.
 
 ### 3.2. Routers Canciones, artistas y playlists. <a name="routers2"></a>
 
@@ -89,7 +89,7 @@ De esta manera, tenemos una aplicación que nos permite acceder a la base de dat
 
 Una vez se ha creado el *Cluster* que usaremos para almacenar los datos, vamos a utilizar Heroku para desplegar nuestra **API REST**.
 
-Antes de comenzar propiamente con Heroku es necesario hacer algunos cambios en los ficheros [`src/db/mongoose.ts`]() y [`package.json`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/package.json).
+Antes de comenzar propiamente con Heroku es necesario hacer algunos cambios en los ficheros [`src/db/mongoose.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/db/mongoose.ts) y [`package.json`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/package.json).
 
 
 
@@ -123,10 +123,3 @@ Se ha seguido el tutorial propuesto por el profesor.
 - [Apuntes sobre Mongoose](https://mongoosejs.com/)
 - [Apuntes sobre API REST](https://ull-esit-inf-dsi-2122.github.io/nodejs-theory/nodejs-rest-api.html)
 - [Apuntes sobre Despliegue del Api REST](https://ull-esit-inf-dsi-2122.github.io/nodejs-theory/nodejs-deployment.html)
-
-
-
-
-
-
-
