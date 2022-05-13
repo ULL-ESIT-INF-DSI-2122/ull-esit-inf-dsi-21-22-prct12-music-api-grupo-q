@@ -27,6 +27,7 @@
         "arrow-parens": "off",
         "object-curly-spacing": "off",
         "brace-style": "off",
-        "spaced-comment": "off"
+        "spaced-comment": "off",
+        "new-cap": "off"
     }
 }
