@@ -1,6 +1,7 @@
-import {Document, Schema, model} from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 import validator from 'validator';
 
+/* Definición de la interfaz para el modelo. */
 interface ArtistaInterface extends Document {
   nombre: string,
   generos: string[],
@@ -8,6 +9,7 @@ interface ArtistaInterface extends Document {
   oyentesmensuales: number
 }
 
+/* Creación de un esquema para el modelo artista. */
 const ArtistaSchema = new Schema({
   name: {
     type: String,
@@ -36,4 +38,5 @@ const ArtistaSchema = new Schema({
   },
 });
 
+/* Exportando el modelo `Artista` con el esquema `ArtistaSchema`. */
 export const Artista = model<ArtistaInterface>('Artista', ArtistaSchema);

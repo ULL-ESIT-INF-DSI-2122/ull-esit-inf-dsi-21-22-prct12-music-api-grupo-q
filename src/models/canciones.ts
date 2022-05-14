@@ -1,6 +1,7 @@
 import {Document, Schema, model} from 'mongoose';
 import validator from 'validator';
 
+/* Definición de la interfaz del modelo Cancion. */
 interface CancionInterface extends Document {
   nombre: string,
   autor: string,
@@ -10,6 +11,7 @@ interface CancionInterface extends Document {
   reproducciones: number
 }
 
+/* Definición del esquema para el modelo Cancion. */
 const CancionSchema = new Schema({
   name: {
     type: String,
@@ -56,4 +58,5 @@ const CancionSchema = new Schema({
   },
 });
 
+/* Exportando el modelo Canción. */
 export const Cancion = model<CancionInterface>('Cancion', CancionSchema);

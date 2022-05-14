@@ -3,6 +3,7 @@ import { Cancion } from '../../models/canciones';
 
 export const deleteCancionRouter = express.Router();
 
+/* Esta es una ruta que borra una canción por su título. */
 deleteCancionRouter.delete('/canciones', async (req, res) => {
   if (!req.query.name) {
     return res.status(400).send({
@@ -24,6 +25,7 @@ deleteCancionRouter.delete('/canciones', async (req, res) => {
   }
 });
 
+/* Esta es una ruta que borra una canción por su id. */
 deleteCancionRouter.delete('/canciones/:id', async (req, res) => {
   try {
     const cancion = await Cancion.findByIdAndDelete(req.params.id);

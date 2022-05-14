@@ -1,17 +1,17 @@
 import * as express from 'express';
-import { Cancion } from '../../models/canciones';
+import { Playlist } from '../../models/playlists';
 
-export const patchCancionRouter = express.Router();
+export const patchPlaylistRouter = express.Router();
 
-/* Esta es una solicitud de parche para actualizar una canción por nombre. */
-patchCancionRouter.patch('/canciones', async (req, res) => {
+/* Esta es una solicitud de parche que actualiza una lista de reproducción por nombre. */
+patchPlaylistRouter.patch('/playlist', async (req, res) => {
   if (!req.query.name) {
     return res.status(400).send({
       error: 'A title must be provided',
     });
   }
 
-  const allowedUpdates = ['name', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
+  const allowedUpdates = ['name', 'generos', 'canciones', 'duracion'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -23,25 +23,25 @@ patchCancionRouter.patch('/canciones', async (req, res) => {
   }
 
   try {
-    const cancion =
-      await Cancion.findOneAndUpdate({ title: req.query.name.toString() }, req.body, {
+    const playlist =
+      await Playlist.findOneAndUpdate({ title: req.query.name.toString() }, req.body, {
         new: true,
         runValidators: true,
       });
 
-    if (!cancion) {
+    if (!playlist) {
       return res.status(404).send();
     }
 
-    return res.send(cancion);
+    return res.send(playlist);
   } catch (error) {
     return res.status(400).send(error);
   }
 });
 
-/* Esta es una solicitud de parche para actualizar una canción por id. */
-patchCancionRouter.patch('/canciones/:id', async (req, res) => {
-  const allowedUpdates = ['name', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
+/* Esta es una solicitud de parche que actualiza una lista de reproducción por id. */
+patchPlaylistRouter.patch('/playlist/:id', async (req, res) => {
+  const allowedUpdates = ['name', 'generos', 'canciones', 'duracion'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -53,16 +53,16 @@ patchCancionRouter.patch('/canciones/:id', async (req, res) => {
   }
 
   try {
-    const cancion = await Cancion.findByIdAndUpdate(req.params.id, req.body, {
+    const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
 
-    if (!cancion) {
+    if (!playlist) {
       return res.status(404).send();
     }
 
-    return res.send(cancion);
+    return res.send(playlist);
   } catch (error) {
     return res.status(400).send(error);
   }

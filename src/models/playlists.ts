@@ -1,6 +1,7 @@
 import {Document, Schema, model} from 'mongoose';
 import validator from 'validator';
 
+/* Definición de la interfaz del modelo PlayList. */
 interface PlayListInterface extends Document {
   nombre: string,
   generos: string[],
@@ -8,6 +9,7 @@ interface PlayListInterface extends Document {
   duracion: string
 }
 
+/* Definición del esquema para el modelo PlayList. */
 const PlayListSchema = new Schema({
   name: {
     type: String,
@@ -38,4 +40,6 @@ const PlayListSchema = new Schema({
   },
 });
 
+/* Exportando el modelo Playlist, que es un modelo de la interfaz PlayListInterface, que es un modelo
+del esquema PlayListSchema. */
 export const Playlist = model<PlayListInterface>('PlayList', PlayListSchema);
