@@ -19,7 +19,7 @@ const CancionSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
+      if (!value.match(/^[A-Z0-9]/)) {
         throw new Error('El nombre de una cancion debe comenzar por mayuscula.');
       } else if (!validator.isAlphanumeric(value)) {
         throw new Error('El nombre de una cancion solo puede contener caracteres alfanumericos');
@@ -31,7 +31,7 @@ const CancionSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
+      if (!value.match(/^[A-Z0-9]/)) {
         throw new Error('El autor de una cancion debe comenzar por mayuscula.');
       } else if (!validator.isAlphanumeric(value)) {
         throw new Error('El autor de una cancion solo puede contener caracteres alfanumericos');
@@ -39,10 +39,8 @@ const CancionSchema = new Schema({
     },
   },
   duracion: {
-    type: String,
+    type: Number,
     required: true,
-    trim: true,
-    //validate: (value: string) => {validDuration(value)},
   },
   generos: {
     type: [String],
