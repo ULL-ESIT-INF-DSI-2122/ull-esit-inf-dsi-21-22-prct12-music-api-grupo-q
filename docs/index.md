@@ -56,7 +56,7 @@ interface CancionInterface extends Document {
 }
 
 const CancionSchema = new Schema({
-  name: {
+  nombre: {
     type: String,
     unique: true,
     required: true,
@@ -85,7 +85,6 @@ const CancionSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    //validate: (value: string) => {validDuration(value)},
   },
   generos: {
     type: [String],
@@ -104,7 +103,7 @@ const CancionSchema = new Schema({
 
 Donde se define el esquema de la clase, este es el mecanismo por el cual podemos modelar un objeto en Mongoose, es decir, el objeto `CancionSchema`, se define las características que tiene la canción, **su nombre, el autor, el genero, el single y las reproducciones**.
 
-Cabe destacar que los atributos de **name** y **autor** tienen una función `validate`, la cual recibe el contenido a almacenar y realiza una comprobación. En ambos casos, esta comprobación se realiza a través de una expresión regular, que comprueba si la primera letra del string es una letra mayúscula contemplada en el alfabeto español.
+Cabe destacar que los atributos de **nombre** y **autor** tienen una función `validate`, la cual recibe el contenido a almacenar y realiza una comprobación. En ambos casos, esta comprobación se realiza a través de una expresión regular, que comprueba si la primera letra del string es una letra mayúscula contemplada en el alfabeto español.
 
 En la última línea se aplica el método `model` que va a especificar el esquema que debe seguir los objetos antes de ser insertados en una colección de la base de datos.
 
@@ -152,7 +151,7 @@ import * as express from 'express';
 import { Cancion } from '../../models/canciones';
 
 getCancionRouter.get('/canciones', async (req, res) => {
-  const filter = req.query.name ? { title: req.query.name.toString() } : {};
+  const filter = req.query.nombre ? { nombre: req.query.nombre.toString() } : {};
 
   try {
     const canciones = await Cancion.find(filter);
@@ -210,19 +209,19 @@ postCancionRouter.post('/canciones', async (req, res) => {
 
 - Para la funcionalidad de modificación hemos usado la etiqueta `patch`. Si en la promesa recibimos algún dato **no autorizado a editar**, **rechazamos la petición**. En caso de que esto falle, lo comunicamos con un error específico.
 
-- Una vez se comprueba que todo es válido, entramos en el `try catch`. Para este caso, la función `findOneAndUpdate()` hace lo que describe: recibe un elemento con el que hacer match (**name**, en este ejemplo) entre todos los de la base de datos, y el **body** con todos los datos nuevos a actualizar.
+- Una vez se comprueba que todo es válido, entramos en el `try catch`. Para este caso, la función `findOneAndUpdate()` hace lo que describe: recibe un elemento con el que hacer match (**nombre**, en este ejemplo) entre todos los de la base de datos, y el **body** con todos los datos nuevos a actualizar.
 
 [Acceso al `src/routers/cancionRouters/patchCancion.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/routers/cancionRouters/patchCancion.ts):
 
 ```ts
 patchCancionRouter.patch('/canciones', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proporcionar un nombre',
     });
   }
 
-  const allowedUpdates = ['name', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
+  const allowedUpdates = ['nombre', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -235,7 +234,7 @@ patchCancionRouter.patch('/canciones', async (req, res) => {
 
   try {
     const cancion =
-      await Cancion.findOneAndUpdate({ title: req.query.name.toString() }, req.body, {
+      await Cancion.findOneAndUpdate({ nombre: req.query.nombre.toString() }, req.body, {
         new: true,
         runValidators: true,
       });
@@ -270,15 +269,15 @@ patchCancionRouter.patch('/canciones/:id', async (req, res) => {
 
 ```ts
 deleteCancionRouter.delete('/canciones', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proporcionar un nombre',
     });
   }
 
   try {
     const cancion =
-      await Cancion.findOneAndDelete({ title: req.query.name.toString() });
+      await Cancion.findOneAndDelete({ nombre: req.query.nombre.toString() });
 
     if (!cancion) {
       return res.status(404).send();
