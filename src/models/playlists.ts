@@ -11,7 +11,7 @@ interface PlayListInterface extends Document {
 
 /* Definición del esquema para el modelo PlayList. */
 const PlayListSchema = new Schema({
-  name: {
+  nombre: {
     type: String,
     unique: true,
     required: true,

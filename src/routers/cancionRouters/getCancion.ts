@@ -9,7 +9,7 @@ Si el parámetro de consulta `name` está presente, lo usará para filtrar los r
 Si el parámetro de consulta `nombre` no está presente, devolverá todas las listas de reproducción. */
 
 getCancionRouter.get('/canciones', async (req, res) => {
-  const filter = req.query.name ? { title: req.query.name.toString() } : {};
+  const filter = req.query.nombre ? { nombre: req.query.nombre.toString() } : {};
 
   try {
     const canciones = await Cancion.find(filter);

@@ -4,12 +4,12 @@ import { Playlist } from '../../models/playlists';
 export const getPlaylistRouter = express.Router();
 
 /* Este es un controlador de ruta para el punto final `/playlist`.
-Está utilizando el objeto `req.query` para obtener el parámetro de consulta `name`.
-Si el parámetro de consulta `name` está presente, lo usará para filtrar los resultados.
+Está utilizando el objeto `req.query` para obtener el parámetro de consulta `nombre`.
+Si el parámetro de consulta `nombre` está presente, lo usará para filtrar los resultados.
 Si el parámetro de consulta `nombre` no está presente, devolverá todas las listas de reproducción. */
 
 getPlaylistRouter.get('/playlist', async (req, res) => {
-  const filter = req.query.name ? { title: req.query.name.toString() } : {};
+  const filter = req.query.nombre ? { title: req.query.nombre.toString() } : {};
 
   try {
     const playlist = await Playlist.find(filter);

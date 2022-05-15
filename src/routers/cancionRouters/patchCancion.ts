@@ -5,13 +5,13 @@ export const patchCancionRouter = express.Router();
 
 /* Esta es una solicitud de parche para actualizar una canción por nombre. */
 patchCancionRouter.patch('/canciones', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proporcionar un nombre',
     });
   }
 
-  const allowedUpdates = ['name', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
+  const allowedUpdates = ['nombre', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -24,7 +24,7 @@ patchCancionRouter.patch('/canciones', async (req, res) => {
 
   try {
     const cancion =
-      await Cancion.findOneAndUpdate({ title: req.query.name.toString() }, req.body, {
+      await Cancion.findOneAndUpdate({ nombre: req.query.nombre.toString() }, req.body, {
         new: true,
         runValidators: true,
       });
@@ -41,7 +41,7 @@ patchCancionRouter.patch('/canciones', async (req, res) => {
 
 /* Esta es una solicitud de parche para actualizar una canción por id. */
 patchCancionRouter.patch('/canciones/:id', async (req, res) => {
-  const allowedUpdates = ['name', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
+  const allowedUpdates = ['nombre', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));

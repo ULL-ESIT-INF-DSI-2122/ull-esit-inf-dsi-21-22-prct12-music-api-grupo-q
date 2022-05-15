@@ -5,15 +5,15 @@ export const deletePlaylistRouter = express.Router();
 
 /* Este es un controlador de ruta que eliminará una lista de reproducción por nombre. */
 deletePlaylistRouter.delete('/playlist', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proveer un nombre',
     });
   }
 
   try {
     const playlist =
-      await Playlist.findOneAndDelete({ title: req.query.name.toString() });
+      await Playlist.findOneAndDelete({ nombre: req.query.nombre.toString() });
 
     if (!playlist) {
       return res.status(404).send();

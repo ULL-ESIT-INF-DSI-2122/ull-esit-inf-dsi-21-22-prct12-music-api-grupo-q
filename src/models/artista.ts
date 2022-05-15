@@ -11,7 +11,7 @@ interface ArtistaInterface extends Document {
 
 /* Creación de un esquema para el modelo artista. */
 const ArtistaSchema = new Schema({
-  name: {
+  nombre: {
     type: String,
     unique: true,
     required: true,

@@ -5,15 +5,15 @@ export const deleteCancionRouter = express.Router();
 
 /* Esta es una ruta que borra una canción por su título. */
 deleteCancionRouter.delete('/canciones', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proporcionar un nombre',
     });
   }
 
   try {
     const cancion =
-      await Cancion.findOneAndDelete({ title: req.query.name.toString() });
+      await Cancion.findOneAndDelete({ nombre: req.query.nombre.toString() });
 
     if (!cancion) {
       return res.status(404).send();

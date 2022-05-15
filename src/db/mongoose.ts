@@ -1,6 +1,6 @@
 import {connect} from 'mongoose';
 
-const databaseURL = process.env.MONGODB_URL || 'mongodb://127.0.0.1:3000/music-app';
+const databaseURL = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/music-app';
 
 connect(databaseURL, {
   useNewUrlParser: true,

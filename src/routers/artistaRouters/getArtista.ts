@@ -4,12 +4,12 @@ import { Artista } from '../../models/artista';
 export const getArtistaRouter = express.Router();
 
 /* Este es un controlador de ruta para el punto final `/artista`.
-Está utilizando el objeto `req.query` para obtener el parámetro de consulta `name`.
-Si el parámetro de consulta `name` está presente, lo usará para filtrar los resultados.
+Está utilizando el objeto `req.query` para obtener el parámetro de consulta `nombre`.
+Si el parámetro de consulta `nombre` está presente, lo usará para filtrar los resultados.
 Si el parámetro de consulta `nombre` no está presente, devolverá todas las listas de reproducción. */
 
 getArtistaRouter.get('/artista', async (req, res) => {
-  const filter = req.query.name ? { title: req.query.name.toString() } : {};
+  const filter = req.query.nombre ? { nombre: req.query.nombre.toString() } : {};
 
   try {
     const artista = await Artista.find(filter);

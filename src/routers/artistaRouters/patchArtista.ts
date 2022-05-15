@@ -4,13 +4,13 @@ import { Artista } from '../../models/artista';
 export const patchArtistaRouter = express.Router();
 
 patchArtistaRouter.patch('/artista', async (req, res) => {
-  if (!req.query.name) {
+  if (!req.query.nombre) {
     return res.status(400).send({
-      error: 'A title must be provided',
+      error: 'Se debe proveer un nombre',
     });
   }
 
-  const allowedUpdates = ['name', 'generos', 'canciones', 'oyentesmensuales'];
+  const allowedUpdates = ['nombre', 'generos', 'canciones', 'oyentesmensuales'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -23,7 +23,7 @@ patchArtistaRouter.patch('/artista', async (req, res) => {
 
   try {
     const artista =
-      await Artista.findOneAndUpdate({ title: req.query.name.toString() }, req.body, {
+      await Artista.findOneAndUpdate({ title: req.query.nombre.toString() }, req.body, {
         new: true,
         runValidators: true,
       });
@@ -39,7 +39,7 @@ patchArtistaRouter.patch('/artista', async (req, res) => {
 });
 
 patchArtistaRouter.patch('/artista/:id', async (req, res) => {
-  const allowedUpdates = ['name', 'generos', 'canciones', 'oyentesmensuales'];
+  const allowedUpdates = ['nombre', 'generos', 'canciones', 'oyentesmensuales'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));

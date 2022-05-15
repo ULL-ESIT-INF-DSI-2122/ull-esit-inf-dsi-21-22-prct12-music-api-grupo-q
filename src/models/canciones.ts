@@ -13,7 +13,7 @@ interface CancionInterface extends Document {
 
 /* Definición del esquema para el modelo Cancion. */
 const CancionSchema = new Schema({
-  name: {
+  nombre: {
     type: String,
     unique: true,
     required: true,
