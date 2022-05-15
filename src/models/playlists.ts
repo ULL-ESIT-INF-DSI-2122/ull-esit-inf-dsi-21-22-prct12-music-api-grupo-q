@@ -17,16 +17,25 @@ const PlayListSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
-        throw new Error('El nombre de una cancion debe comenzar por mayuscula.');
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El nombre de una canción debe comenzar por mayúscula.');
       } else if (!validator.isAlphanumeric(value)) {
-        throw new Error('El nombre de una cancion solo puede contener caracteres alfanumericos');
+        throw new Error('El nombre de una canción solo puede contener caracteres alfanuméricos');
       }
     },
   },
   generos: {
     type: [String],
     required: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z0-9]/)) {
+          throw new Error('El género de una playlist debe comenzar por mayúscula.');
+        } else if (!validator.isAlphanumeric(element)) {
+          throw new Error('El género de una playlist solo puede contener caracteres alfanuméricos');
+        }
+      });
+    },
   },
   canciones: {
     type: [String],
@@ -36,7 +45,11 @@ const PlayListSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    //validate: (value: string) => {validDuration(value)},
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('La duración no pueden ser negativas');
+      }
+    },
   },
 });
 

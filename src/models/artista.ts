@@ -17,7 +17,7 @@ const ArtistaSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
+      if (!value.match(/^[A-Z0-9]/)) {
         throw new Error('El nombre de un artista debe comenzar por mayuscula.');
       } else if (!validator.isAlphanumeric(value)) {
         throw new Error('El nombre de un artista solo puede contener caracteres alfanumericos');
@@ -27,6 +27,16 @@ const ArtistaSchema = new Schema({
   generos: {
     type: [String],
     required: true,
+    trim: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z0-9]/)) {
+          throw new Error('El género de un artista debe comenzar por mayuscula.');
+        } else if (!validator.isAlphanumeric(element)) {
+          throw new Error('El género de un artista solo puede contener caracteres alfanumericos');
+        }
+      });
+    },
   },
   canciones: {
     type: [String],
@@ -35,6 +45,11 @@ const ArtistaSchema = new Schema({
   oyentesmensuales: {
     type: Number,
     required: true,
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('Los oyentes mensuales no pueden ser negativos');
+      }
+    },
   },
 });
 
