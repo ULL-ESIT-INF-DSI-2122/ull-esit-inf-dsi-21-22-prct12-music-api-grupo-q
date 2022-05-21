@@ -6,7 +6,7 @@ interface PlayListInterface extends Document {
   nombre: string,
   generos: string[],
   canciones: string[],
-  duracion: string
+  duracion: number
 }
 
 /* Definición del esquema para el modelo PlayList. */
@@ -42,7 +42,7 @@ const PlayListSchema = new Schema({
     required: true,
   },
   duracion: {
-    type: String,
+    type: Number,
     required: true,
     trim: true,
     validate: (value: number) => {

@@ -5,7 +5,7 @@ import validator from 'validator';
 interface CancionInterface extends Document {
   nombre: string,
   autor: string,
-  duracion: string,
+  duracion: number,
   generos: string[],
   single: boolean,
   reproducciones: number
