@@ -23,7 +23,7 @@ patchArtistaRouter.patch('/artista', async (req, res) => {
 
   try {
     const artista =
-      await Artista.findOneAndUpdate({ title: req.query.nombre.toString() }, req.body, {
+      await Artista.findOneAndUpdate({ nombre: req.query.nombre.toString() }, req.body, {
         new: true,
         runValidators: true,
       });

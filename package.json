@@ -2,12 +2,14 @@
   "name": "ull-p12",
   "version": "1.0.0",
   "description": "### Componentes del grupo que han realizado el proyecto: - José Javier Díaz González [(alu0101128894@ull.edu.es)](alu0101128894@ull.edu.es) - Daniel Hernández Fajardo [(alu0101320489@ull.edu.es)](alu0101320489@ull.edu.es) - Álvaro Rodríguez Gómez [(alu0101362953@ull.edu.es)](alu0101362953@ull.edu.es)",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "mocha",
-    "start": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "typedoc": "typedoc",
-    "coverage": "nyc npm test && nyc report --reporter=lcov"
+    "heroku-postbuild": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
+  },
+  "engines": {
+    "node": "18.x"
   },
   "keywords": [],
   "author": "",
