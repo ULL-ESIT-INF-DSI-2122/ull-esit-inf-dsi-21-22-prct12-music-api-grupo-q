@@ -41,15 +41,18 @@ Por lo que será necesario dividir la carpeta `src` en varias subcarpetas:
 - [`db`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/tree/master/src/db) que contendrá el archivo encargado de establecer la conexión al servidor de MongoDB. 
 - [`index.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/index.ts) que será el fichero que defina el esquema y modelo de datos con Mongoose. 
 
-### 2.1. Clase Canciones. <a name="canciones"></a>
+### 2.1. Modelo Canciones. <a name="canciones"></a>
 
 En la ruta [`src/models/canciones.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/models/canciones.ts) se especifica lo que tendrá canción:
 
 ```ts
+import {Document, Schema, model} from 'mongoose';
+import validator from 'validator';
+
 interface CancionInterface extends Document {
   nombre: string,
   autor: string,
-  duracion: string,
+  duracion: number,
   generos: string[],
   single: boolean,
   reproducciones: number
@@ -62,10 +65,10 @@ const CancionSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
-        throw new Error('El nombre de una cancion debe comenzar por mayuscula.');
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El nombre de una canción debe comenzar por mayúscula.');
       } else if (!validator.isAlphanumeric(value)) {
-        throw new Error('El nombre de una cancion solo puede contener caracteres alfanumericos');
+        throw new Error('El nombre de una canción solo puede contener caracteres alfanuméricos');
       }
     },
   },
@@ -74,36 +77,59 @@ const CancionSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string) => {
-      if (!value.match(/^[A-Z]/)) {
-        throw new Error('El autor de una cancion debe comenzar por mayuscula.');
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El autor de una canción debe comenzar por mayúscula.');
       } else if (!validator.isAlphanumeric(value)) {
-        throw new Error('El autor de una cancion solo puede contener caracteres alfanumericos');
+        throw new Error('El autor de una canción solo puede contener caracteres alfanuméricos');
       }
     },
   },
   duracion: {
-    type: String,
+    type: Number,
     required: true,
-    trim: true,
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('La duración no pueden ser negativas');
+      }
+    },
   },
   generos: {
     type: [String],
     required: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z]/)) {
+          throw new Error('El género de una música debe comenzar por mayúscula.');
+        } else if (!validator.isAlphanumeric(element)) {
+          throw new Error('El género de una música solo puede contener caracteres alfanuméricos');
+        }
+      });
+    },
   },
   single: {
     type: Boolean,
     required: true,
+    validate: (value: number) => {
+      if ( typeof value !== 'boolean' ) {
+        throw new Error('Single debe devolver true o false');
+      }
+    },
   },
   reproducciones: {
     type: Number,
     required: true,
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('Las reproducciones no pueden ser negativas');
+      }
+    },
   },
 });
 ```
 
 Donde se define el esquema de la clase, este es el mecanismo por el cual podemos modelar un objeto en Mongoose, es decir, el objeto `CancionSchema`, se define las características que tiene la canción, **su nombre, el autor, el genero, el single y las reproducciones**.
 
-Cabe destacar que los atributos de **nombre** y **autor** tienen una función `validate`, la cual recibe el contenido a almacenar y realiza una comprobación. En ambos casos, esta comprobación se realiza a través de una expresión regular, que comprueba si la primera letra del string es una letra mayúscula contemplada en el alfabeto español.
+Cabe destacar que los atributos de **nombre**, **autor** y **generos** tienen una función `validate`, la cual recibe el contenido a almacenar y realiza una comprobación de que los valores sean alfanuméricos y empiecen por mayúscula o números a partir de una expresión regular. Para los atributos numéricos como **duracion** y **reproducciones** se valida que sean números positivos y para **single** que sea true o false.
 
 En la última línea se aplica el método `model` que va a especificar el esquema que debe seguir los objetos antes de ser insertados en una colección de la base de datos.
 
@@ -111,12 +137,12 @@ En la última línea se aplica el método `model` que va a especificar el esquem
 export const Cancion = model<CancionInterface>('Cancion', CancionSchema);
 ```
 
-### 2.2. Clase Artista. <a name="artista"></a>
+### 2.2. Modelo Artista. <a name="artista"></a>
 
 En la ruta [`src/models/artista.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/models/artista.ts), se puede observar que la clase está formado por un nombre, generos, canciones y oyentes mensuales.
 
 
-### 2.3. Clase Playlists. <a name="playlists"></a>
+### 2.3. Modelo Playlists. <a name="playlists"></a>
 
 En la ruta [`src/models/playlist.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/models/artista.ts), se puede observar que la clase está formado por un nombre, generos, canciones y duración.
 
@@ -323,7 +349,7 @@ Thunder Client es una extensión de Visual Studio Code que nos permite interactu
 
 La extensión es simple, clara y directa, y tiene funcionalidades muy interesantes, como crear entornos que almacenan variables o colecciones de comandos donde almacenar plantillas.
 
-
+[Acceso a la coleccion de pruebas](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/thunder-collection_pruebas_p12.json):
 
 ### 4.3 MongoDB Atlas. <a name="mongoatlas"></a>
 
@@ -332,6 +358,8 @@ Esta tecnología es el paso lógico de MongoDB Atlas. Si la tecnología original
 **MongoDB Compass** es una aplicación externa a Visual Studio Code, que nos permite crear un Cluster a través de la página web de MongoDB Atlas, donde podremos almacenar nuestras bases de datos en la nube. Posteriormente, podremos acceder a este Cluster usando la aplicación e indicando la dirección de Atlas.
 
 De esta manera, tenemos una aplicación que nos permite acceder a la base de datos alojada en la nube y observar los contenidos allí almacenados.
+
+En nuestro caso la conexión dentro de **MongoDB Compass** es mongodb+srv://music-app:musicappDSI@cluster0.qjc90.mongodb.net/music-app
 
 ### 4.4. Heroku. <a name="heroku"></a>
 
