@@ -3,7 +3,12 @@ import { Playlist } from '../../models/playlists';
 
 export const patchPlaylistRouter = express.Router();
 
-/* Esta es una solicitud de parche que actualiza una lista de reproducción por nombre. */
+/**
+ * Funcion que actualiza los datos de una playlist por nombre.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+ */
 patchPlaylistRouter.patch('/playlist', async (req, res) => {
   if (!req.query.nombre) {
     return res.status(400).send({
@@ -39,7 +44,12 @@ patchPlaylistRouter.patch('/playlist', async (req, res) => {
   }
 });
 
-/* Esta es una solicitud de parche que actualiza una lista de reproducción por id. */
+/**
+ * Funcion que actualiza los datos de una playlist por id.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+*/
 patchPlaylistRouter.patch('/playlist/:id', async (req, res) => {
   const allowedUpdates = ['nombre', 'generos', 'canciones', 'duracion'];
   const actualUpdates = Object.keys(req.body);
