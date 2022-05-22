@@ -145,11 +145,117 @@ export const Cancion = model<CancionInterface>('Cancion', CancionSchema);
 
 En la ruta [`src/models/artista.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/models/artista.ts), se puede observar que la clase está formado por un nombre, generos, canciones y oyentes mensuales.
 
+```ts
+interface ArtistaInterface extends Document {
+  nombre: string,
+  generos: string[],
+  canciones: string[],
+  oyentesmensuales: number
+}
+
+const ArtistaSchema = new Schema({
+  nombre: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+    validate: (value: string) => {
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El nombre de un artista debe comenzar por mayuscula.');
+      } else if (!validator.isAlphanumeric(value)) {
+        throw new Error('El nombre de un artista solo puede contener caracteres alfanumericos');
+      }
+    },
+  },
+  generos: {
+    type: [String],
+    required: true,
+    trim: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z0-9]/)) {
+          throw new Error('El género de un artista debe comenzar por mayuscula.');
+        } else if (!validator.isAlphanumeric(element)) {
+          throw new Error('El género de un artista solo puede contener caracteres alfanumericos');
+        }
+      });
+    },
+  },
+  canciones: {
+    type: [String],
+    required: true,
+  },
+  oyentesmensuales: {
+    type: Number,
+    required: true,
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('Los oyentes mensuales no pueden ser negativos');
+      }
+    },
+  },
+});
+
+export const Artista = model<ArtistaInterface>('Artista', ArtistaSchema);
+```
 
 ### 2.3. Modelo Playlists. <a name="playlists"></a>
 
 En la ruta [`src/models/playlist.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/models/artista.ts), se puede observar que la clase está formado por un nombre, generos, canciones y duración.
 
+```ts
+interface PlayListInterface extends Document {
+  nombre: string,
+  generos: string[],
+  canciones: string[],
+  duracion: number
+}
+
+const PlayListSchema = new Schema({
+  nombre: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+    validate: (value: string) => {
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El nombre de una canción debe comenzar por mayúscula.');
+      } else if (!validator.isAlphanumeric(value)) {
+        throw new Error('El nombre de una canción solo puede contener caracteres alfanuméricos');
+      }
+    },
+  },
+  generos: {
+    type: [String],
+    required: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z0-9]/)) {
+          throw new Error('El género de una playlist debe comenzar por mayúscula.');
+        } else if (!validator.isAlphanumeric(element)) {
+          throw new Error('El género de una playlist solo puede contener caracteres alfanuméricos');
+        }
+      });
+    },
+  },
+  canciones: {
+    type: [String],
+    required: true,
+  },
+  duracion: {
+    type: Number,
+    required: true,
+    trim: true,
+    validate: (value: number) => {
+      if (value < 0) {
+        throw new Error('La duración no pueden ser negativas');
+      }
+    },
+  },
+});
+
+export const Playlist = model<PlayListInterface>('PlayList', PlayListSchema);
+```
 
 ## 3. Routers. <a name="routers"></a>
 
