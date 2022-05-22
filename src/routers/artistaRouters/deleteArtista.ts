@@ -3,7 +3,11 @@ import { Artista } from '../../models/artista';
 
 export const deleteArtistaRouter = express.Router();
 
-/* Eliminación de un artista por nombre. */
+/**
+ * Funcion que elimina un artista de la base de datos segun un nombre
+ * Comprueba que se reciba el nombre del artista y que esta exista en la bbdd.
+ * En caso afirmativo la elimina y en cualquier otro caso informa de un error.
+*/
 deleteArtistaRouter.delete('/artista', async (req, res) => {
   if (!req.query.nombre) {
     return res.status(400).send({
@@ -25,7 +29,11 @@ deleteArtistaRouter.delete('/artista', async (req, res) => {
   }
 });
 
-/* Esta es una ruta que elimina un artista por id. */
+/**
+ * Funcion que elimina un artista de la base de datos segun id
+ * Comprueba que exista en la bbdd.
+ * En caso afirmativo la elimina y en cualquier otro caso informa de un error.
+*/
 deleteArtistaRouter.delete('/artista/:id', async (req, res) => {
   try {
     const artista = await Artista.findByIdAndDelete(req.params.id);

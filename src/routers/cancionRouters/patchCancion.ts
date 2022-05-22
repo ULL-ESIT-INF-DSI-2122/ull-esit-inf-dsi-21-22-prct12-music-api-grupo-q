@@ -3,7 +3,12 @@ import { Cancion } from '../../models/canciones';
 
 export const patchCancionRouter = express.Router();
 
-/* Esta es una solicitud de parche para actualizar una canción por nombre. */
+/**
+ * Funcion que actualiza los datos de una cancion por nombre.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+ */
 patchCancionRouter.patch('/canciones', async (req, res) => {
   if (!req.query.nombre) {
     return res.status(400).send({
@@ -39,7 +44,12 @@ patchCancionRouter.patch('/canciones', async (req, res) => {
   }
 });
 
-/* Esta es una solicitud de parche para actualizar una canción por id. */
+/**
+ * Funcion que actualiza los datos de una cancion por id.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+*/
 patchCancionRouter.patch('/canciones/:id', async (req, res) => {
   const allowedUpdates = ['nombre', 'autor', 'duracion', 'generos', 'single', 'reproducciones'];
   const actualUpdates = Object.keys(req.body);

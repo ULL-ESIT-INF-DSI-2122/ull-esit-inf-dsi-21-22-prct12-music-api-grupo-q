@@ -3,7 +3,12 @@ import { Cancion } from '../../models/canciones';
 
 export const postCancionRouter = express.Router();
 
-/* Crear una nueva canción y guardarla en la base de datos. */
+/**
+ * Funcion que crea una nueva cancion y la almacena en la base de datos.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+ */
 postCancionRouter.post('/canciones', async (req, res) => {
   const cancion = new Cancion(req.body);
 

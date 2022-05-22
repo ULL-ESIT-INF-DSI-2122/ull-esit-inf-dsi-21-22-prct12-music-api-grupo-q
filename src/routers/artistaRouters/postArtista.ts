@@ -3,7 +3,12 @@ import { Artista } from '../../models/artista';
 
 export const postArtistaRouter = express.Router();
 
-/* Crear un nuevo artista y guardarlo en la base de datos. */
+/**
+ * Funcion que crea un nuevo artista y lo almacena en la base de datos.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+ */
 postArtistaRouter.post('/artista', async (req, res) => {
   const artista = new Artista(req.body);
 

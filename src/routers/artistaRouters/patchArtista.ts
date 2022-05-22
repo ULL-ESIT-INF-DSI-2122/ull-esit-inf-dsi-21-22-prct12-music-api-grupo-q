@@ -3,6 +3,12 @@ import { Artista } from '../../models/artista';
 
 export const patchArtistaRouter = express.Router();
 
+/**
+ * Funcion que actualiza los datos de un artista por nombre.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+ */
 patchArtistaRouter.patch('/artista', async (req, res) => {
   if (!req.query.nombre) {
     return res.status(400).send({
@@ -38,6 +44,12 @@ patchArtistaRouter.patch('/artista', async (req, res) => {
   }
 });
 
+/**
+ * Funcion que actualiza los datos de un artista por id.
+ * Comprueba que los atributos que se van a editar estan permitidos.
+ * Crea el objeto para modificar y lo actualiza.
+ * Devolviendo estados en consecuencia a los errores.
+*/
 patchArtistaRouter.patch('/artista/:id', async (req, res) => {
   const allowedUpdates = ['nombre', 'generos', 'canciones', 'oyentesmensuales'];
   const actualUpdates = Object.keys(req.body);

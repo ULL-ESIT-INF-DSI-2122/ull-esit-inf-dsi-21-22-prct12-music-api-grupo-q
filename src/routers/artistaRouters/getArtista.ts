@@ -3,11 +3,13 @@ import { Artista } from '../../models/artista';
 
 export const getArtistaRouter = express.Router();
 
-/* Este es un controlador de ruta para el punto final `/artista`.
-Está utilizando el objeto `req.query` para obtener el parámetro de consulta `nombre`.
-Si el parámetro de consulta `nombre` está presente, lo usará para filtrar los resultados.
-Si el parámetro de consulta `nombre` no está presente, devolverá todas las listas de reproducción. */
-
+/**
+ * Funcion que obtiene a un artista de la base de datos segun un nombre.
+ * Comprueba que se disponga del parametro nombre en la query
+ * y crea el filtro para la base de datos tratandolo como una cadena.
+ * La bbdd se filtra y si se obtiene algun artista se devuelve, en
+ * caso contrario se informa de un error.
+*/
 getArtistaRouter.get('/artista', async (req, res) => {
   const filter = req.query.nombre ? { nombre: req.query.nombre.toString() } : {};
 
@@ -23,11 +25,11 @@ getArtistaRouter.get('/artista', async (req, res) => {
   }
 });
 
-/* Este es un controlador de ruta para el punto final `/artista/:id`.
-Está utilizando `req.params.id` para obtener el parámetro `id`.
-Si el parámetro `id` está presente, lo usará para filtrar los resultados.
-Si el parámetro `id` no está presente, devolverá todas las listas de reproducción. */
-
+/**
+ * Funcion que obtiene a un artista de la base de datos segun un id.
+ * Se busca ese id en la bbdd y si se encuentra se devuelve, en
+ * caso contrario se informa de un error.
+*/
 getArtistaRouter.get('/artista/:id', async (req, res) => {
   try {
     const artista = await Artista.findById(req.params.id);
