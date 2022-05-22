@@ -33,8 +33,8 @@ En esta práctica, la segunda grupal de la asignatura, se implementa una **API**
 ###
 | **Acceso al Vídeo e Informe:** |
 | --- |
-| [Acceso al Informe P12 -  API Node/Express de gestión de información musical]() |
-| [Acceso al vídeo.](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/docs/index.md) |
+| [Acceso al Informe.](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/) |
+| [Acceso al Vídeo.](https://youtu.be/6Id96lltJ5Q) |
 
 | **Repositorios Práctica 12:** |
 | --- |
