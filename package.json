@@ -6,7 +6,9 @@
   "scripts": {
     "heroku-postbuild": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "test": "mocha",
+    "coverage": "nyc npm test && nyc report --reporter=lcov"
   },
   "engines": {
     "node": "18.x"
