@@ -1,15 +1,20 @@
 import * as express from 'express';
 import { Playlist } from '../../models/playlists';
 
-/* Creación de un nuevo enrutador para la ruta de la lista de reproducción. */
+/**
+ * Funcion que obtiene una playlist de la base de datos segun un nombre.
+ * Comprueba que se disponga del parametro nombre en la query
+ * y crea el filtro para la base de datos tratandolo como una cadena.
+ * La bbdd se filtra y si se obtiene alguna playlist se devuelve, en
+ * caso contrario se informa de un error.
+*/
 export const postPlaylistRouter = express.Router();
 
 /**
- * Funcion que crea una nueva playlist y la almacena en la base de datos.
- * Comprueba que los atributos que se van a editar estan permitidos.
- * Crea el objeto para modificar y lo actualiza.
- * Devolviendo estados en consecuencia a los errores.
- */
+ * Funcion que obtiene una playlist de la base de datos segun un id.
+ * Se busca ese id en la bbdd y si se encuentra se devuelve, en
+ * caso contrario se informa de un error.
+*/
 postPlaylistRouter.post('/playlist', async (req, res) => {
   const playlist = new Playlist(req.body);
 
