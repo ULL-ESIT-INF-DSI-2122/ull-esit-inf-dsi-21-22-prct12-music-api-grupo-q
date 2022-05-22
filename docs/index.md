@@ -3,9 +3,9 @@
 ## Índice
 - [1. Introducción.](#introduccion)
 - [2. Desarrollo.](#desarrollo)
-  - [2.1. Clase Canciones.](#canciones)
-  - [2.2. Clase Artista.](#artista)
-  - [2.2. Clase Playlists.](#playlists)
+  - [2.1. Modelo Canciones.](#canciones)
+  - [2.2. Modelo Artista.](#artista)
+  - [2.2. Modelo Playlists.](#playlists)
 - [3. Routers.](#routers)
   - [3.1. Router Default.](#routerdefault)
   - [3.2. Routers Canciones, artistas y playlists.](#routers2)
@@ -18,6 +18,10 @@
   - [4.2. ThunderClient.](#thunderclient)
   - [4.3. MongoDB Atlas.](#mongoatlas)
   - [4.4. Heroku.](#heroku)
+      - [4.4.1. Get.](#get2)
+      - [4.4.2. Post.](#post2)
+      - [4.4.3. Patch.](#patch2)
+      - [4.4.4. Delete.](#delete2)
 - [5. Workflow con Github Actions e integración continua.](#workflow)
 - [6. Dificultades y conclusión.](#conclusion)
 - [7. Referencias.](#referencias)
@@ -150,7 +154,6 @@ En la ruta [`src/models/playlist.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/u
 ## 3. Routers. <a name="routers"></a>
 
 En la ruta [`src/routers`](https://ull-esit-inf-dsi-2122.github.io/prct11-async-sockets/) se especifica las funciones **get, post, patch, delete** encargadas de *leer, añadir, modificar y eliminar* para cada uno de los objetos contemplados en la aplicación: canciones, artistas y playlists. Para ello, tenemos separados en 3 ficheros diferentes (una para cada tipo) esas funciones.
-
 
 ### 3.1. Router Default. <a name="routerdefault"></a>
 
@@ -339,9 +342,33 @@ La tecnología tiene estas dos partes, que juntas suponen una herramienta potent
 
 ### 4.1. Mongoose. <a name="mongoose"></a>
 
-El módulo de Mongoose nos permite modelar objetos. Con estos conseguimos que nuestros datos puedan ser almacenados en la base de datos de MongoDB. Se ha definido un **Schema** para los distintos objetos.
+El módulo de Mongoose nos permite modelar objetos. Con estos conseguimos que nuestros datos puedan ser almacenados en la base de datos de MongoDB. Se ha definido un **Schema** para los distintos objetos. Un ejemplo sería por ejemplo con Artista:
 
+```ts
+const ArtistaSchema = new Schema({
+  nombre: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+    validate: (value: string) => {
+      if (!value.match(/^[A-Z0-9]/)) {
+        throw new Error('El nombre de un artista debe comenzar por mayuscula.');
+      } else if (!validator.isAlphanumeric(value)) {
+        throw new Error('El nombre de un artista solo puede contener caracteres alfanumericos');
+      }
+    },
+  },
+  generos: {
+    ...
+});
+```
 
+Y al finalizar se exporta el modelo `Artista` con el esquema `ArtistaSchema`.
+
+```ts
+export const Artista = model<ArtistaInterface>('Artista', ArtistaSchema);
+```
 
 ### 4.2. ThunderClient. <a name="thunderclient"></a>
 
@@ -349,7 +376,23 @@ Thunder Client es una extensión de Visual Studio Code que nos permite interactu
 
 La extensión es simple, clara y directa, y tiene funcionalidades muy interesantes, como crear entornos que almacenan variables o colecciones de comandos donde almacenar plantillas.
 
-[Acceso a la coleccion de pruebas](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/thunder-collection_pruebas_p12.json):
+[Acceso a la `coleccion de pruebas JSON.`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/thunder-collection_pruebas_p12.json)
+
+#### 4.4.1. Get. <a name="get2"></a>
+
+![Imagen Get Heroku](img/get_cancion_id.png)
+
+#### 4.4.2. Post. <a name="post2"></a>
+
+![Imagen Post Heroku](img/post_cancion.png)
+
+#### 4.4.3. Patch. <a name="patch2"></a>
+
+![Imagen Patch Heroku](img/patch_cancion.png)
+
+#### 4.4.4. Delete. <a name="delete2"></a>
+
+![Imagen Delete Heroku](img/delete_cancion_id.png)
 
 ### 4.3 MongoDB Atlas. <a name="mongoatlas"></a>
 
@@ -359,15 +402,13 @@ Esta tecnología es el paso lógico de MongoDB Atlas. Si la tecnología original
 
 De esta manera, tenemos una aplicación que nos permite acceder a la base de datos alojada en la nube y observar los contenidos allí almacenados.
 
-En nuestro caso la conexión dentro de **MongoDB Compass** es mongodb+srv://music-app:musicappDSI@cluster0.qjc90.mongodb.net/music-app
+En nuestro caso la conexión dentro de **MongoDB Compass** es `mongodb+srv://music-app:musicappDSI@cluster0.qjc90.mongodb.net/music-app`
 
 ### 4.4. Heroku. <a name="heroku"></a>
 
-Una vez se ha creado el *Cluster* que usaremos para almacenar los datos, vamos a utilizar Heroku para desplegar nuestra **API REST**.
+Una vez se ha creado el *Cluster* que usaremos para almacenar los datos, vamos a utilizar **Heroku** para desplegar nuestra **API REST**.
 
 Antes de comenzar propiamente con Heroku es necesario hacer algunos cambios en los ficheros [`src/db/mongoose.ts`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/src/db/mongoose.ts) y [`package.json`](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/package.json).
-
-
 
 ## 5. Workflow con Github Actions e integración continua.. <a name="workflow"></a>
 
@@ -390,6 +431,12 @@ Se ha seguido el tutorial propuesto por el profesor.
 [Acceso al sonar-project.propierties](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/blob/master/sonar-project.properties)
 
 ## 6. Dificultades y conclusión. <a name="conclusion"></a>
+
+En cuanto al resultado de la práctica, se ha cumplido la creación de una API y el manejo de sus datos con los módulos especificados en el enunciado de la misma.
+
+Se ha hecho uso de MongoDB, Mongoose para la creación de la Base de datos, además se han implementado las operaciones CRUD para el manejo de los datos introducidos, se ha utilizado también ThunderClient para crear las peticiones correspondientes a estas operaciones CRUD. Luego, con MongoDB Atlas establecemos una base de datos en la nube y finalmente se usa Heroku para postear este servicio en la red. Todo ello con Node.js como entorno para ejecutar el servicio.
+
+Finalmente, cabe destacar que la parte más complicado ha sido la implementación es la utilización de MongoDB, de Mongoose y Heroku por su desconocimiento de esta última tecnología y su configuración.
 
 ## 7. Referencias. <a name="referencias"></a>
 
