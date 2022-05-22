@@ -3,7 +3,11 @@ import { Playlist } from '../../models/playlists';
 
 export const deletePlaylistRouter = express.Router();
 
-/* Este es un controlador de ruta que eliminará una lista de reproducción por nombre. */
+/**
+ * Funcion que elimina una playlist de la base de datos segun un nombre
+ * Comprueba que se reciba el nombre de la playlist y que esta exista en la bbdd.
+ * En caso afirmativo la elimina y en cualquier otro caso informa de un error.
+*/
 deletePlaylistRouter.delete('/playlist', async (req, res) => {
   if (!req.query.nombre) {
     return res.status(400).send({
@@ -25,7 +29,11 @@ deletePlaylistRouter.delete('/playlist', async (req, res) => {
   }
 });
 
-/* Este es un controlador de ruta que eliminará una lista de reproducción por id. */
+/**
+ * Funcion que elimina una playlist de la base de datos segun un id
+ * Comprueba que esta exista en la bbdd.
+ * En caso afirmativo la elimina y en cualquier otro caso informa de un error.
+*/
 deletePlaylistRouter.delete('/playlist/:id', async (req, res) => {
   try {
     const playlist = await Playlist.findByIdAndDelete(req.params.id);
