@@ -10,6 +10,9 @@
     <a href="https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/actions/workflows/sonarcloud.yml">
         <img alt="Sonar-Cloud Status" src="https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/actions/workflows/sonarcloud.yml/badge.svg">
     </a>
+    <a href="https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/actions/workflows/pages/pages-build-deployment">
+        <img alt="Github Status" src="https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master">
+    </a>
     <a href="https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q?branch=master">
         <img alt="Coveralls" src="https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo-q/badge.svg?branch=master">
     </a>
